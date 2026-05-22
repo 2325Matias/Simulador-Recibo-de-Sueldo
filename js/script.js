@@ -6,7 +6,12 @@ function calcularRecibo() {
     const sumaFijaNR = parseFloat(document.getElementById('inSumaFija').value) || 0;
     const montoAdicionalExtra = parseFloat(document.getElementById('inMontoAdicional').value) || 0;
 
-    // --- CÁLCULOS REMUNERATIVOS ---
+    // --- ENTRADAS HORAS EXTRAS ---
+    const hsTrabajo = parseFloat(document.getElementById('inHsTrabajo').value) || 160;
+    const cant50 = parseFloat(document.getElementById('inCant50').value) || 0;
+    const cant100 = parseFloat(document.getElementById('inCant100').value) || 0;
+
+    // --- CÁCULOS REMUNERATIVOS (RECIBO BLANCO) ---
     const porcAntiguedad = antiguedadAnios * 1; 
     const haberAntiguedad = (sueldoMensual * porcAntiguedad) / 100;
 
@@ -15,7 +20,7 @@ function calcularRecibo() {
 
     const totalHaberesRem = sueldoMensual + gratificacion + haberAntiguedad + haberPresentismo;
 
-    // --- CÁLCULOS NO REMUNERATIVOS ---
+    // --- CÁLCULOS NO REMUNERATIVOS (RECIBO BLANCO) ---
     const baseCalculoNR = recomposicionNR + sumaFijaNR;
     const nrAntiguedad = (baseCalculoNR * porcAntiguedad) / 100;
 
@@ -24,7 +29,7 @@ function calcularRecibo() {
     
     const totalHaberesSDesc = baseCalculoNR + nrAntiguedad + nrPresentismo;
 
-    // --- RETENCIONES / DEDUCCIONES ---
+    // --- RETENCIONES / DEDUCCIONES (RECIBO BLANCO) ---
     const deJubilacion = (totalHaberesRem * 11) / 100;
     const deLey19032 = (totalHaberesRem * 3) / 100;
     const deObraSocial = (totalHaberesRem * 3) / 100;
@@ -37,11 +42,28 @@ function calcularRecibo() {
 
     const totalDeducciones = deJubilacion + deLey19032 + deObraSocial + deObraSocialNR + deRetencionSindical + deFaecys + deAporteOsecac;
 
-    // --- CÁLCULO DE NETOS ---
+    // --- PASO 1: NETO A COBRAR LEGAL ---
     const netoReciboEfectivo = totalHaberesRem + totalHaberesSDesc - totalDeducciones;
-    const totalBolsilloEfectivo = netoReciboEfectivo + montoAdicionalExtra;
 
-    // --- RENDERIZADO DE LA TABLA ---
+    // --- TU LÓGICA DE EXCEL PARA HORAS EXTRAS ---
+    // 1- Sueldo completo = Monto en negro (adicional) + Neto a cobrar
+    const sueldoCompleto = montoAdicionalExtra + netoReciboEfectivo;
+
+    // 2- Hs simple = Sueldo completo / Hs trabajo
+    const valorHoraSimple = sueldoCompleto > 0 ? (sueldoCompleto / hsTrabajo) : 0;
+
+    // 3- Hs al 50% = (Hs simple * 1.5) * Cantidad
+    const haberHs50 = (valorHoraSimple * 1.5) * cant50;
+
+    // 4- Hs al 100% = (Hs simple * 2) * Cantidad
+    const haberHs100 = (valorHoraSimple * 2) * cant100;
+
+    const totalHorasExtrasNegro = haberHs50 + haberHs100;
+
+    // --- TOTAL FINAL EN BOLSILLO ---
+    const totalBolsilloEfectivo = netoReciboEfectivo + montoAdicionalExtra + totalHorasExtrasNegro;
+
+    // --- RENDERIZADO DE LA TABLA DEL RECIBO (SE MANTIENE LIMPIO) ---
     const tbody = document.getElementById('tbodyConceptos');
     tbody.innerHTML = ''; 
 
@@ -84,10 +106,22 @@ function calcularRecibo() {
     document.getElementById('totNR').innerText = '$ ' + totalHaberesSDesc.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
     
     document.getElementById('netoRecibo').innerText = '$ ' + netoReciboEfectivo.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    
+    // Mostramos el desglose de lo calculado con tu fórmula
+    if (totalHorasExtrasNegro > 0) {
+        document.getElementById('lblCalculoHsExtras').innerHTML = `
+            Sueldo Completo Base: <strong>$ ${sueldoCompleto.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong> | 
+            Valor Hora Simp: <strong>$ ${valorHoraSimple.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong><br>
+            Total Hs Extras (50% y 100%): <strong>$ ${totalHorasExtrasNegro.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong>
+        `;
+    } else {
+        document.getElementById('lblCalculoHsExtras').innerText = "";
+    }
+
     document.getElementById('totalBolsillo').innerText = '$ ' + totalBolsilloEfectivo.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
     
     if (netoReciboEfectivo > 0) {
-        document.getElementById('netoLetras').innerText = "Son: " + numeroALetras(Math.floor(netoReciboEfectivo)) + " Pesos M/N.";
+        document.getElementById('netoLetras').innerText = "Son: " + numeroALetras(Math.floor(netoReciboEfectivo)) + " Pesos.";
     } else {
         document.getElementById('netoLetras').innerText = "";
     }
