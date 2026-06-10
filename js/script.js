@@ -33,8 +33,8 @@ function calcularRecibo() {
     const deJubilacion = (totalHaberesRem * 11) / 100;
     const deLey19032 = (totalHaberesRem * 3) / 100;
     const deObraSocial = (totalHaberesRem * 3) / 100;
-    const deRetencionSindical = (totalHaberesRem * 2) / 100; 
-    const deFaecys = (totalHaberesRem * 0.5) / 100;
+    const deRetencionSindical = ((totalHaberesRem + totalHaberesSDesc) * 2) / 100; 
+    const deFaecys = ((totalHaberesRem + totalHaberesSDesc) * 0.5) / 100;
     const deAporteOsecac = totalHaberesRem > 0 ? 100.00 : 0.00;
 
     const totalConceptosNR = recomposicionNR + sumaFijaNR + nrAntiguedad + nrPresentismo;
