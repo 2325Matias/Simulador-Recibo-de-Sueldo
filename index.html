@@ -3,169 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Recibo de Sueldo - Empleados de Comercio</title>
+    <title>Selección de Recibo - Farm Tec S.R.L.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-modern-flat py-5">
+<body class="bg-modern-flat min-vh-100 d-flex align-items-center py-5">
 
 <div class="container-minimal-center">
-    
-    <header class="text-center mb-4">
-        <h2 class="fw-extrabold text-dark tracking-tight">Calculadora de Haberes</h2>
-        <p class="text-muted small">Simulación de Liquidación • Farm Tec S.R.L.</p>
+    <header class="text-center mb-5">
+        <h2 class="fw-extrabold text-dark tracking-tight">Simulador de Recibo de Sueldo</h2>
+        <p class="text-muted small">Selecciona la modalidad de recibo para ingresar al calculador</p>
     </header>
-    
-    <div class="card card-clean p-4 mb-4">
-        <h5 class="card-title-clean mb-4">Datos a Completar</h5>
-        <div class="row g-4">
-            <div class="col-md-8">
-                <label for="inEmpleadoNombre" class="label-clean">Apellido y Nombres</label>
-                <input type="text" id="inEmpleadoNombre" class="form-control input-clean" placeholder="Ej. Ramirez Matias Ezequiel" oninput="actualizarDatosEmpleado()">
-            </div>
-            <div class="col-md-4">
-                <label class="label-clean">Fecha de Ingreso</label>
-                <input type="date" id="inEmpleadoIngreso" class="form-control input-clean" onchange="actualizarDatosEmpleado()">
-            </div>
-            <div class="col-md-4">
-                <label class="label-clean">Sueldo Basico ($)</label>
-                <input type="number" id="inSueldo" class="form-control input-clean" value="0" step="0.01" oninput="calcularRecibo()">
-            </div>
-            <div class="col-md-4">
-                <label class="label-clean">Gratificaciones - VER RECIBO ($)</label>
-                <input type="number" id="inGratificacion" class="form-control input-clean" value="0" step="0.01" oninput="calcularRecibo()">
-            </div>
-            <div class="col-md-4">
-                <label class="label-clean">Años Antigüedad</label>
-                <input type="number" id="inAntiguedadAnios" class="form-control input-clean" value="0" min="0" oninput="calcularRecibo()">
-            </div>
 
-            <div class="col-12"><hr class="my-1" style="border-color: #e2e8f0;"></div>
-            <div class="col-md-4">
-                <label class="label-clean">Horas Mensuales de Trabajo</label>
-                <input type="number" id="inHsTrabajo" class="form-control input-clean" value="160" min="1" oninput="calcularRecibo()">
-            </div>
-            <div class="col-md-4">
-                <label class="label-clean">Cant. Horas al 50% (Negro)</label>
-                <input type="number" id="inCant50" class="form-control input-clean" value="0" min="0" step="0.5" oninput="calcularRecibo()">
-            </div>
-            <div class="col-md-4">
-                <label class="label-clean">Cant. Horas al 100% (Negro)</label>
-                <input type="number" id="inCant100" class="form-control input-clean" value="0" min="0" step="0.5" oninput="calcularRecibo()">
-            </div>
-            <div class="col-12"><hr class="my-1" style="border-color: #e2e8f0;"></div>
-
-            <div class="col-md-6">
-                <label class="label-clean">Recomposición N/R - VER RECIBO ($)</label>
-                <input type="number" id="inRecomposicion" class="form-control input-clean" value="0" step="0.01" oninput="calcularRecibo()">
-            </div>
-            <div class="col-md-6">
-                <label class="label-clean">Suma Fija No Remunerativa  - VER RECIBO ($)</label>
-                <input type="number" id="inSumaFija" class="form-control input-clean" value="0" step="0.01" oninput="calcularRecibo()">
-            </div>
-            <div class="col-12 pt-2">
-                <div class="adicional-box p-3 rounded">
-                    <label class="label-clean text-danger fw-bold mb-2">Monto Adicional Extra (Monto en Negro Base)</label>
-                    <input type="number" id="inMontoAdicional" class="form-control input-clean border-danger-subtle" value="0" step="0.01" oninput="calcularRecibo()">
+    <div class="row g-4 justify-content-center">
+        <!-- Botón Opción 1 -->
+        <div class="col-md-6">
+            <div class="card card-clean text-center p-4 h-100 d-flex flex-column justify-content-between">
+                <div>
+                    <h5 class="fw-bold text-dark mb-2">Recibo Versión 1</h5>
+                    <p class="text-muted small mb-4">Simulación estándar de haberes y deducciones de ley.</p>
                 </div>
+                <a href="Recibo 1.html" class="btn btn-primary w-100 py-2 fw-semibold">Ingresar a Versión 1</a>
+            </div>
+        </div>
+
+        <!-- Botón Opción 2 -->
+        <div class="col-md-6">
+            <div class="card card-clean text-center p-4 h-100 d-flex flex-column justify-content-between">
+                <div>
+                    <h5 class="fw-bold text-dark mb-2">Recibo Versión 2</h5>
+                    <p class="text-muted small mb-4">Simulación alternativa con variantes de cálculo o ajustes.</p>
+                </div>
+                <a href="Recibo 2.html" class="btn btn-outline-primary w-100 py-2 fw-semibold">Ingresar a Versión 2</a>
             </div>
         </div>
     </div>
-
-    <div class="card receipt-box p-4 mb-4">
-        <div class="receipt-top pb-3 mb-3">
-            <div class="row g-2 small text-muted">
-                <div class="col-6">
-                    <span class="d-block text-dark fw-bold">Farm Tec S.R.L.</span>
-                    <span class="d-block">Av. Triunvirato 4473</span>
-                    <span class="d-block">1431 Villa Urquiza, CABA</span>
-                </div>
-                <div class="col-6 text-end">
-                    <span class="d-block"><strong>C.U.I.T.:</strong> 33-71567269-9</span>
-                    <span class="badge bg-secondary text-white font-mono my-1 px-2 py-1">PERÍODO: 04/2026</span>
-                    <span class="d-block"><strong>Liquidación:</strong> Mensual</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="employee-info-row p-3 mb-3 rounded">
-            <div class="row text-center text-sm-start g-2">
-                <div class="col-sm-2">
-                    <span class="info-lbl">Legajo</span>
-                    <span class="info-val font-mono">00000010</span>
-                </div>
-                <div class="col-sm-5 border-sm-center">
-                    <span class="info-lbl">Apellido y Nombres</span>
-                    <span class="info-val text-uppercase text-dark text-truncate d-block" id="lblEmpleadoNombre">-- EN ESPERA DE DATOS --</span>
-                </div>
-                <div class="col-sm-5 text-sm-end">
-                    <span class="info-lbl">Categoría / Ingreso</span>
-                    <span class="info-val d-block text-dark" style="font-size: 0.85rem;">AUX-A AUXILIAR A</span>
-                    <span class="font-mono text-muted small" id="lblEmpleadoIngreso">--/--/----</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="table-responsive">
-            <table class="table table-flat align-middle">
-                <thead>
-                    <tr>
-                        <th class="text-center" style="width: 10%;">Código</th>
-                        <th style="width: 45%;">Concepto</th>
-                        <th class="text-center" style="width: 10%;">Cant.</th>
-                        <th class="text-end" style="width: 11%;">Haberes Rem.</th>
-                        <th class="text-end" style="width: 11%;">Deducciones</th>
-                        <th class="text-end" style="width: 13%;">Hab. N/R</th>
-                    </tr>
-                </thead>
-                <tbody id="tbodyConceptos">
-                </tbody>
-            </table>
-        </div>
-
-        <div class="totals-row row g-0 text-center rounded mt-2">
-            <div class="col-4">
-                <small class="d-block text-muted style-lbl">Total Remunerativo</small>
-                <span id="totHaberes" class="font-mono fw-bold text-success">$ 0,00</span>
-            </div>
-            <div class="col-4 border-start border-end">
-                <small class="d-block text-muted style-lbl">Total Deducciones</small>
-                <span id="totDeducc" class="font-mono fw-bold text-danger">$ 0,00</span>
-            </div>
-            <div class="col-4">
-                <small class="d-block text-muted style-lbl">Total No Rem.</small>
-                <span id="totNR" class="font-mono fw-bold text-secondary">$ 0,00</span>
-            </div>
-        </div>
-
-        <div class="neto-banner-fixed mt-4 p-3 rounded">
-            <div class="row align-items-center">
-                <div class="col-sm-7 text-center text-sm-start">
-                    <span class="neto-lbl">NETO LEGAL A COBRAR</span>
-                    <div id="netoLetras" class="neto-txt-letras small italic"></div>
-                </div>
-                <div class="col-sm-5 text-center text-sm-end mt-2 mt-sm-0">
-                    <span id="netoRecibo" class="neto-val-display font-mono">$ 0,00</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card pocket-box-clean p-4 text-center">
-        <h5 class="text-danger fw-bold mb-1 tracking-tight" style="font-size: 1.05rem;">TOTAL REAL EN BOLSILLO</h5>
-        <p class="text-muted small mx-auto mb-2" style="max-width: 540px;">
-            Suma del neto del recibo, el monto en negro fijo y las horas extras calculadas sobre el sueldo completo.
-        </p>
-        <div id="lblCalculoHsExtras" class="text-muted small mb-3 lh-base"></div>
-        <div class="font-mono final-pocket-value" id="totalBolsillo">$ 0,00</div>
-    </div>
-
 </div>
 
-<script src="js/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
